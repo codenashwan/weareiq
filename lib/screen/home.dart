@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'dart:math';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:provider/provider.dart';
+import 'package:test/components/mytile.dart';
 import 'package:test/modules/api.dart';
 import 'package:lottie/lottie.dart';
 
@@ -34,208 +35,225 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF8F32F3),
-        body: Consumer<Api>(builder: (context, api, child) {
-          if (api.information.length > 0) {
-            return ListView(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                  ),
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    image();
-                                  });
-                                },
-                                child: SvgPicture.asset(
-                                  "assets/img/" + image().toString() + ".svg",
+        backgroundColor: Colors.white,
+        body: Consumer<Api>(
+          builder: (context, api, child) {
+            if (api.information.length > 0) {
+              return ListView(
+                padding: EdgeInsets.all(10),
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Color(0xffff512f),
+                          Color(0xffdd2476),
+                        ],
+                      ),
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 80,
+                                height: 80,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
                                 ),
-                              ),
-                            ),
-                            Expanded(
-                              child: SizedBox(),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  api.information['data']['first_name'] +
-                                      " " +
-                                      api.information['data']['last_name'],
-                                  style: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 22,
-                                    color: Color(0xFF8F32F3),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      image();
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                    "assets/img/" + image().toString() + ".svg",
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      api.information['data']['profile_name'],
-                                      style: TextStyle(
-                                        fontFamily: "Poppins",
-                                        fontSize: 20,
-                                        color: Colors.black,
+                              ),
+                              Expanded(
+                                child: SizedBox(),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    api.information['data']['first_name'] +
+                                        " " +
+                                        api.information['data']['last_name'],
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        api.information['data']['profile_name'],
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      api.information['data']['is_expired']
-                                          ? "( Expire )"
-                                          : "( Active )",
-                                      style: TextStyle(
-                                        fontFamily: "Poppins",
-                                        fontSize: 20,
-                                        color: api.information['data']
-                                                ['is_expired']
-                                            ? Colors.deepOrange
-                                            : Colors.green,
+                                      SizedBox(
+                                        width: 10,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SleekCircularSlider(
-                        appearance: CircularSliderAppearance(
-                            customWidths: CustomSliderWidths(
-                                trackWidth: 2,
-                                progressBarWidth: 7,
-                                shadowWidth: 70),
-                            customColors: CustomSliderColors(
-                                dotColor: Colors.white.withOpacity(0.8),
-                                trackColor: Color(0xffFF8282).withOpacity(0.6),
-                                progressBarColors: [
-                                  Color(0xFF8F32F3).withOpacity(0.9),
-                                  Color(0xFF8F32F3).withOpacity(0.9),
-                                  Color(0xffFE6490).withOpacity(0.5)
+                                      Text(
+                                        api.information['data']['is_expired']
+                                            ? "( Expire )"
+                                            : "( Active )",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 20,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
-                                shadowColor: Color(0xffFFD7E2),
-                                shadowMaxOpacity: 0.08),
-                            infoProperties: InfoProperties(
-                                mainLabelStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                modifier: (double value) {
-                                  final day = value.toInt();
-                                  return '$day Days';
-                                }),
-                            startAngle: 180,
-                            angleRange: 180,
-                            size: 150.0),
-                        min: 0,
-                        max: 100,
-                        initialValue: double.parse(api.information['data']
-                                ['remaining_day']
-                            .toString()),
-                      ),
-                      Text(
-                        api.information['data']['remaining_day'].toString() +
-                            " Days - " +
-                            api.information['data']['remaining_hour']
-                                .toString() +
-                            " Hour - " +
-                            api.information['data']['remaining_minute']
-                                .toString() +
-                            " Min",
-                        style: TextStyle(
-                          fontFamily: "Poppins",
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        SleekCircularSlider(
+                          appearance: CircularSliderAppearance(
+                              customWidths: CustomSliderWidths(
+                                  trackWidth: 5,
+                                  progressBarWidth: 10,
+                                  shadowWidth: 70),
+                              customColors: CustomSliderColors(
+                                  dotColor: Color(0xffff512f).withOpacity(0.8),
+                                  trackColor: Color(0xffeeee).withOpacity(0.4),
+                                  progressBarColors: [
+                                    Color(0xFFffff).withOpacity(0.8),
+                                    Color(0xFFffff).withOpacity(0.8),
+                                    Color(0xffffff).withOpacity(0.8),
+                                  ],
+                                  shadowColor: Color(0xffFFD7E2),
+                                  shadowMaxOpacity: 0.08),
+                              infoProperties: InfoProperties(
+                                  mainLabelStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  modifier: (double value) {
+                                    final day = value.toInt();
+                                    return '$day Days';
+                                  }),
+                              startAngle: 180,
+                              angleRange: 180,
+                              size: 150.0),
+                          min: 0,
+                          max: 100,
+                          initialValue: double.parse(api.information['data']
+                                  ['remaining_day']
+                              .toString()),
+                        ),
+                        Text(
+                          api.information['data']['remaining_day'].toString() +
+                              " Days - " +
+                              api.information['data']['remaining_hour']
+                                  .toString() +
+                              " Hour - " +
+                              api.information['data']['remaining_minute']
+                                  .toString() +
+                              " Min",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GridView(
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1,
+                    ),
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      MyTile(Icons.fingerprint, "Your ID",
+                          api.information['data']['id'].toString()),
+                      MyTile(Icons.call, "Your Phonenumber",
+                          api.information['data']['phone'].toString()),
+                      MyTile(Icons.rss_feed, "Your Plan",
+                          api.information['data']['profile_name'].toString()),
+                      MyTile(
+                          Icons.cloud_upload,
+                          "Uprate",
+                          api.information['data']['profile_uprate'].toString() +
+                              " Mbps"),
+                      MyTile(
+                          Icons.cloud_download,
+                          "Downrate",
+                          api.information['data']['profile_downrate']
+                                  .toString() +
+                              " Mbps"),
+                      MyTile(
+                          Icons.wb_sunny,
+                          "Remaining",
+                          api.information['data']['remaining_day'].toString() +
+                              " Days"),
                     ],
                   ),
-                ),
-                ListView(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: ListTile(
-                          leading: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFF8F32F3),
-                            ),
-                            width: 40,
-                            height: 40,
-                            child: Icon(
-                              Icons.ac_unit_rounded,
-                              color: Colors.white,
-                            ),
-                          ),
-                          title: Text(
-                            'Lorem ipsum dolor...',
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Color(0xFF303030),
-                            size: 20,
-                          ),
-                          tileColor: Colors.transparent,
-                          dense: false,
-                          contentPadding:
-                              EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                        ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xffdd2476),
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(14),
                       ),
-                    )
-                  ],
+                      padding: EdgeInsets.all(18),
+                    ),
+                    child: Text(
+                      'Recharge Now',
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 20,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              return Center(
+                child: Lottie.asset(
+                  'assets/img/load.json',
+                  width: 300,
+                  height: 300,
+                  fit: BoxFit.fill,
                 ),
-              ],
-            );
-          } else {
-            return Center(
-              child: Lottie.asset(
-                'assets/img/load.json',
-                width: 300,
-                height: 300,
-                fit: BoxFit.fill,
-              ),
-            );
-          }
-        }),
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ void main() {
   ]);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: Color(0xFF8F32F3),
+      statusBarColor: Colors.red,
     ),
   );
   runApp(

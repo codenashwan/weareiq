@@ -58,77 +58,64 @@ class _HomeState extends State<Home> {
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                        ListTile(
+                          leading: Container(
+                            width: 80,
+                            height: 80,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  image();
+                                });
+                              },
+                              child: SvgPicture.asset(
+                                "assets/img/" + image().toString() + ".svg",
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            api.information['data']['first_name'] +
+                                " " +
+                                api.information['data']['last_name'],
+                            style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                          subtitle: Row(
                             children: [
-                              Container(
-                                width: 80,
-                                height: 80,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      image();
-                                    });
-                                  },
-                                  child: SvgPicture.asset(
-                                    "assets/img/" + image().toString() + ".svg",
-                                  ),
+                              Text(
+                                api.information['data']['profile_name'],
+                                style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 20,
+                                  color: Colors.white,
                                 ),
                               ),
-                              Expanded(
-                                child: SizedBox(),
+                              SizedBox(
+                                width: 10,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    api.information['data']['first_name'] +
-                                        " " +
-                                        api.information['data']['last_name'],
-                                    style: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        api.information['data']['profile_name'],
-                                        style: TextStyle(
-                                          fontFamily: "Poppins",
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        api.information['data']['is_expired']
-                                            ? "( Expire )"
-                                            : "( Active )",
-                                        style: TextStyle(
-                                          fontFamily: "Poppins",
-                                          fontSize: 20,
-                                          color: Colors.white70,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              Text(
+                                api.information['data']['is_expired']
+                                    ? "( Expire )"
+                                    : "( Active )",
+                                style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 20,
+                                  color: Colors.white70,
+                                ),
                               ),
                             ],
                           ),
+                          tileColor: Color(0xFFF5F5F5),
+                          dense: false,
+                          contentPadding:
+                              EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
                         ),
                         SizedBox(
                           height: 30,

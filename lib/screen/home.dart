@@ -1,8 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:test/modules/api.dart';
+import 'package:provider/provider.dart';
+import 'package:consumer/consumer.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,18 +20,14 @@ class _HomeState extends State<Home> {
     return randomNumber;
   }
 
-  Future getToken() async {
-    var response = await Dio().get(
-      "https://my.iq.group/api/selfcare/v2/autologin",
-      queryParameters: {'X-Channel': "web", "Accept-Language": "en"},
-    );
-    print(response.data);
+  void autologin() async {
+    Provider.of<Api>(context, listen: false).getInformation();
   }
 
   @override
   void initState() {
     super.initState();
-    getToken();
+    autologin();
   }
 
   @override

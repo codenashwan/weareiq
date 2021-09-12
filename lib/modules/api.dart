@@ -8,6 +8,7 @@ class Api extends ChangeNotifier {
   String url1 = "https://my.iq.group/api/selfcare/v2/autologin";
   String url2 = "https://my.iq.group/api/selfcare/v2/cpe";
   Map<String, dynamic> headers = {'X-Channel': "web", "Accept-Language": "en"};
+  late Map<String, dynamic> information = {};
 
   void getInformation() async {
     var _dio = new Dio();
@@ -33,8 +34,7 @@ class Api extends ChangeNotifier {
         headers: this.headers,
       ),
     );
-
-    print(response2.data);
+    this.information = response2.data;
     notifyListeners();
   }
 }

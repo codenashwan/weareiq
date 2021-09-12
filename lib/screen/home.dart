@@ -151,7 +151,7 @@ class _HomeState extends State<Home> {
                               angleRange: 180,
                               size: 150.0),
                           min: 0,
-                          max: 100,
+                          max: 30,
                           initialValue: double.parse(api.information['data']
                                   ['remaining_day']
                               .toString()),
